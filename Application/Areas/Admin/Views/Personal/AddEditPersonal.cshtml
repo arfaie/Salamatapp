@@ -1,0 +1,77 @@
+﻿@model Application.Models.TblPersonal
+@using Application.PublicModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Application
+
+
+<form asp-controller="Personal" asp-action="AddEditPersonal" id="addeditpersonal" data-ajax="true" data-ajax-method="post"
+      data-ajax-update="#addeditpersonal" data-ajax-mode="replace">
+
+
+    @*header*@
+
+    @if (Model.idPerson != 0)
+    {
+        @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "ویرایش پرسنل" })
+    }
+    else
+    {
+        @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "افزودن پرسنل" })
+    }
+
+
+    @*body*@
+
+    <div class="modal-body form-horizontal">
+        
+        <div class="form-group">
+            <label asp-for="fname" class="col-lg-3 col-sm-3 control-label"></label>
+            <div class="col-lg-6">
+                <input asp-for="fname" class="form-control" />
+                <span asp-validation-for="fname" class="text-danger"></span>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label asp-for="family" class="col-lg-3 col-sm-3 control-label"></label>
+            <div class="col-lg-6">
+                <input asp-for="family" class="form-control" />
+                <span asp-validation-for="family" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label asp-for="natCode" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="natCode" class="form-control" />
+                    <span asp-validation-for="natCode" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group hidden">
+                <label asp-for="idPerson" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="idPerson" class="form-control" />
+                </div>
+            </div>
+
+            <input type="hidden" name="redirecturl" value="@Url.Action("index","Personal")" />
+
+        </div>
+
+
+    </div>
+
+    @*footer*@
+    @if (Model.idPerson != 0)
+    {
+        @await Html.PartialAsync("_ModalFooter", new ModalFooter { SubmitButtonText = "ویرایش پرسنل" })
+    }
+    else
+    {
+        @await Html.PartialAsync("_ModalFooter", new ModalFooter { SubmitButtonText = "افزودن پرسنل" })
+    }
+
+</form>

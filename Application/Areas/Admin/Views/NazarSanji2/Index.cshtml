@@ -1,0 +1,200 @@
+﻿@model Application.Models.NavbarModels.NazarSanji2Navbar
+@using Application.PublicModel
+
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Application
+
+@{
+    ViewBag.Title = "نظرات بستری شدگان";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/persiandatepicker/jquery.Bootstrap-PersianDateTimePicker.css" rel="stylesheet" />
+
+<div style="color:white;text-align:center" class=@TempData["css"]>
+    @if (TempData["notice"] != null)
+    {
+        <p>@TempData["notice"]</p>
+    }
+</div>
+<div class="layout-content-body">
+    <div class="row gutter-xs">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-actions">
+                        <button type="button" class="card-action card-toggler" title="Collapse"></button>
+                        <button type="button" class="card-action card-reload" title="Reload"></button>
+                        <button type="button" class="card-action card-remove" title="Remove"></button>
+                    </div>
+                    <strong>لیست نظرات بستری شدگان</strong>
+                </div>
+                <div>
+                    <form method="post" asp-controller="NazarSanji2" asp-action="nazarsanjiSearch">
+
+                        <div class="input-group" style="margin-top: 7px;">
+
+                            <div class="input-group col-md-2 pull-right">
+                                <div class="input-group-addon" data-MdDateTimePicker="true" data-trigger="click" data-targetselector="#todate1">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </div>
+                                <input type="text" class="form-control" id="todate1" name="todate1" placeholder="تا تاریخ" data-MdDateTimePicker="true" data-placement="right" />
+                            </div>
+
+                            <div class="input-group col-md-2 pull-right" style="margin-left: 7px;">
+                                <div class="input-group-addon" data-MdDateTimePicker="true" data-trigger="click" data-targetselector="#fromDate1" data-groupid="group1" data-fromdate="true" data-enabletimepicker="false" data-placement="left">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </div>
+                                <input type="text" class="form-control" id="fromDate1" name="fromDate1" placeholder="از تاریخ" data-MdDateTimePicker="true" data-trigger="click" data-targetselector="#fromDate1" data-groupid="group1" data-fromdate="true" data-enabletimepicker="false" data-placement="right" />
+                            </div>
+
+
+
+                            <div class="input-group-btn">
+
+                                <button style="border-radius: 4px; margin-right: 20px; margin-left: 50px;" class="btn btn-primary" type="submit">جستجو</button>
+
+                                <button style="border-radius: 4px; margin-top: 2px;  margin-right: 20px; margin-left: 50px;" class="btn btn-primary" onclick="exportTableToExcel('example',prompt('نام فایل را وارد کنید:'))">خروجی اکسل</button>
+
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="md-form-group md-label-floating col-md-6">
+                        <div class="md-form-group md-label-floating col-md-6">
+                            <input class="md-form-control" type="text" name="name" id="serachInput" spellcheck="false" required="" aria-required="true">
+                            <label class="md-control-label">جستجو</label>
+                        </div>
+                    </div>
+                    <div class="md-form-group md-label-floating col-md-6">
+                        <div class="margin-top">
+                            <div class="col-xs-6 col-md-6">
+
+                            </div>
+                        </div>
+                    </div>
+                    <table id="example" class="table table-striped table-nowrap dataTable" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>کد</th>
+                                <th>شهرستان</th>
+                                <th style="width: 50px;">جنسیت</th>
+                                <th>بیمارستان</th>
+                                <th>مالکیت</th>
+                                <th style="width: 50px;">مدت بستری</th>
+                                <th>نام صندوق</th>
+                                <th style="width: 100px;">تاریخ</th>
+                                <th>زمان</th>
+                                <th id="am">عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int i = 0;
+                                foreach (var item in Model.nazarSanji2s)
+                                {
+                                    i++;
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@item.cityname</td>
+                                        <td>@item.sex</td>
+                                        <td style="width: 50px;">@item.hostName</td>
+                                        <td>@item.malekiyat</td>
+                                        <td>@item.modatBastari</td>
+                                        <td>@item.sandogName</td>
+                                        <td>@item.ComDate</td>
+                                        <td>@item.ComTime</td>
+
+                                        <td>
+
+                                            <a class="btn btn-danger" id="showcategory" data-toggle="modal" asp-action="DeleteNazarSanji2"
+                                               data-target="#modal-action-nazarsanji" asp-route-Id="@item.id">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                                حذف
+                                            </a>
+
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="progress" class="addModal">
+    <div class="addCenter">
+        <img src="~/Content/loading.gif" />
+    </div>
+</div>
+<div id="infoModalAlertColored" tabindex="-1" role="dialog" class="modal fade">
+
+</div>
+<div id="successModalAlert" tabindex="-1" role="dialog" class="modal fade">
+
+</div>
+
+
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action-nazarsanji", Size = ModalSize.Medium })
+
+@section Scripts{
+    <script src="~/js/modal-js/nazarsanji2-index.js"></script>
+    <script src="~/persiandatepicker/calendar.js"></script>
+    <script src="~/persiandatepicker/jquery.Bootstrap-PersianDateTimePicker.js"></script>
+
+    <script>
+
+        function exportTableToExcel(example, filename) {
+
+            if (filename != null && filename != '') {
+
+                var downloadLink;
+                var dataType = 'application/vnd.ms-excel';
+                var tableSelect = document.getElementById(example);
+                var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+                // Specify file name
+                //filename = filename ? filename + '.xls' : 'excel_data.xls';
+                filename = filename;
+
+                // Create download link element
+                downloadLink = document.createElement("a");
+
+                document.body.appendChild(downloadLink);
+
+                if (navigator.msSaveOrOpenBlob) {
+                    var blob = new Blob(['\ufeff', tableHTML],
+                        {
+                            type: dataType
+                        });
+                    navigator.msSaveOrOpenBlob(blob, filename);
+                } else {
+                    // Create a link to the file
+                    downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+                    // Setting the file name
+                    downloadLink.download = filename;
+
+                    //triggering the function
+                    downloadLink.click();
+                }
+
+            } else {
+                alert('نام فایل نمی تواند خالی باشد');
+            }
+        }
+
+    </script>
+
+}
+
+
+

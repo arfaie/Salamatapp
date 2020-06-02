@@ -1,0 +1,118 @@
+﻿
+<ul class="nav navbar-nav navbar-right">
+    @*<li class="visible-xs-block">
+            <h4 class="navbar-text text-center">Hi, Teddy Wilson</h4>
+        </li>*@
+
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true">
+                    <span class="icon-with-child hidden-xs">
+                        <span class="icon icon-comments-o icon-lg"></span>
+                        <span class="badge badge-danger badge-above right">@Model.Comments.Count()</span>
+                    </span>
+                    <span class="visible-xs-block">
+                        <span class="icon icon-comments-o icon-lg"></span>
+                        <span class="badge badge-danger pull-right">@Model.Comments.Count()</span>
+                        نظرات
+                    </span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
+                    <div class="dropdown-header">
+                        <h5 class="dropdown-heading">نظرات جدید</h5>
+                    </div>
+                    <div class="dropdown-body">
+                        <div class="list-group list-group-divided custom-scrollbar">
+                            @{
+                                Random rnd = new Random();
+                            }
+                            @foreach (var item in Model.Comments)
+                            {
+                                <a class="list-group-item" href="/Admin/CommentDetails?idRow=@item.id">
+                                    <div class="notification">
+                                        <div class="notification-media">
+                                            @{
+                                                int number = rnd.Next(1, 7);
+                                                string src = "/images/Avatar/" + number + ".png";
+                                            }
+                                            <img class="rounded" width="40" height="40" src="@src" />
+                                        </div>
+                                        <div class="notification-content">
+                                            <small class="notification-timestamp">@item.Date</small>
+                                            <h5 class="notification-heading">@item.Name</h5>
+                                            <p class="notification-text">
+                                                <small class="truncate">@item.Body</small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                                                }
+                        </div>
+                    </div>
+                    <div class="dropdown-footer">
+                        <a class="dropdown-btn" href="/Admin/Comments">مشاهده همه</a>
+                    </div>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true">
+                    <span class="icon-with-child hidden-xs">
+                        <span class="icon icon-envelope-o icon-lg"></span>
+                        <span class="badge badge-danger badge-above right">@Model.Suggestions.Count()</span>
+                    </span>
+                    <span class="visible-xs-block">
+                        <span class="icon icon-envelope-o icon-lg"></span>
+                        <span class="badge badge-danger pull-right">@Model.Suggestions.Count()</span>
+                        انتفادات و پیشنهادات
+                    </span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
+                    <div class="dropdown-header">
+                        <h5 class="dropdown-heading">انتفادات و پیشنهادات</h5>
+                    </div>
+                    <div class="dropdown-body">
+                        <div class="list-group list-group-divided custom-scrollbar">
+                            @{
+                            Random rnd2 = new Random();
+                            }
+                            @foreach (var item in Model.Suggestions)
+                        {
+                        <a class="list-group-item" href="/Admin/UnreadSuggestions">
+                            <div class="notification"><img  src="~/images/Avatar/"/>
+                                <div class="notification-media">
+                                    @{
+                                            int number = rnd2.Next(1, 7);
+                                            string src = "/images/Avatar/" + number + ".png";
+                                    }
+                                    <img class="rounded" width="40" height="40" src="@src" />
+                                </div>
+                                <div class="notification-content">
+                                    <small class="notification-timestamp">@item.Date</small>
+                                    <h5 class="notification-heading">@item.Name</h5>
+                                    <p class="notification-text">
+                                        <small class="truncate">@item.Body</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                                            }
+                        </div>
+                    </div>
+                    <div class="dropdown-footer">
+                        <a class="dropdown-btn" href="/Admin/Suggestions">مشاهده همه</a>
+                    </div>
+                </div>
+            </li>
+            
+                                            
+    <li class="dropdown hidden-xs">
+        <button class="navbar-account-btn" data-toggle="dropdown" aria-haspopup="true">
+            @Model.userName<img class="rounded" width="36" height="36" src="~/Content/ArasLogo.png" alt="Aras">
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right">
+            <li><a href="/Admin/Logout">خروج</a></li>
+        </ul>
+    </li>
+
+
+</ul>

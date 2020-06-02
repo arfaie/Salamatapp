@@ -1,0 +1,181 @@
+﻿@model Application.Models.Tbl_Edarat
+@using Application.PublicModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Application
+
+
+<form asp-controller="Edarat" asp-action="AddEditEdarat" id="addeditedarat" data-ajax="true" data-ajax-method="post"
+      data-ajax-update="#addeditedarat" data-ajax-mode="replace">
+
+
+    @*header*@
+
+    @if (Model.idOffice != 0)
+    {
+        @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "ویرایش اداره" })
+    }
+    else
+    {
+        @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "افزودن اداره" })
+    }
+
+
+
+
+
+    @*body*@
+
+    <div class="modal-body form-horizontal">
+
+        <div class="row">
+            <div class="form-group">
+                <label asp-for="city" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="city" class="form-control" />                   
+                    <span asp-validation-for="city" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="admin" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="admin" class="form-control" />
+                    <span asp-validation-for="admin" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="Tell" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="Tell" class="form-control" />
+                    <span asp-validation-for="Tell" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Fax" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="Fax" class="form-control" />
+                    <span asp-validation-for="Fax" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="adress" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <textarea asp-for="adress" class="form-control" ></textarea>
+                    <span asp-validation-for="adress" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="x" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="x" class="form-control" />
+                    <span asp-validation-for="x" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="y" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="y" class="form-control" />
+                    <span asp-validation-for="y" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group hidden">
+                <label asp-for="idOffice" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="idOffice" class="form-control" />
+                </div>
+            </div>
+
+            <input type="hidden" name="redirecturl" value="@Url.Action("index","Edarat")" />
+
+        </div>
+
+
+    </div>
+
+
+    @*----------------------------------------------------------------------------------------------------------------------*@
+
+    @*<div class="modal-dialog">
+            <div class="modal-content bg-success">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <span class="icon icon-check icon-5x"></span>
+                        <h3>Success</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            <br>Animi ducimus id itaque totam saepe reiciendis corporis consectetur.
+                        </p>
+                        <div class="m-t-lg">
+                            <button class="btn btn-default" data-dismiss="modal" type="button">Continue</button>
+                            <button class="btn btn-success" data-dismiss="modal" type="button">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>*@
+
+    @*--------------------------------------------------------------------------------------------------------------------------------*@
+
+    @*<div role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content animated bounceIn">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">×</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <span class="text-success icon icon-check icon-5x"></span>
+                            <h3 class="text-success">Success</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                <br>Animi ducimus id itaque totam saepe reiciendis corporis consectetur.
+                            </p>
+                            <div class="m-t-lg">
+                                <button class="btn btn-success" data-dismiss="modal" type="button">Continue</button>
+                                <button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>*@
+
+
+
+    @*footer*@
+    @if (Model.idOffice != 0)
+    {
+        @await Html.PartialAsync("_ModalFooter", new ModalFooter { SubmitButtonText = "ویرایش اداره" })
+    }
+    else
+    {
+        @await Html.PartialAsync("_ModalFooter", new ModalFooter { SubmitButtonText = "افزودن اداره" })
+    }
+
+
+
+
+
+</form>

@@ -1,0 +1,131 @@
+﻿@model Application.Models.Tbl_Setadi
+@using Application.PublicModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Application
+
+
+<form asp-controller="Setadi" asp-action="AddEditSetadi" id="addeditsetadi" data-ajax="true" data-ajax-method="post"
+      data-ajax-update="#addeditsetadi" data-ajax-mode="replace">
+
+
+    @*header*@
+
+    @if (Model.idSetadi != 0)
+    {
+        @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "ویرایش ستادی" })
+    }
+    else
+    {
+        @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "افزودن ستادی" })
+    }
+
+    @*body*@
+
+    <div class="modal-body form-horizontal">
+
+        <div class="row">
+            <div class="form-group">
+                <label asp-for="edare" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="edare" class="form-control" />
+                    <span asp-validation-for="edare" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="tel" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="tel" class="form-control" />
+                    <span asp-validation-for="tel" class="text-danger"></span>
+                </div>
+            </div>
+         
+            <div class="form-group hidden">
+                <label asp-for="idSetadi" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="idSetadi" class="form-control" />
+                </div>
+            </div>
+
+            <input type="hidden" name="redirecturl" value="@Url.Action("index","Setadi")" />
+
+        </div>
+
+
+    </div>
+
+
+    @*----------------------------------------------------------------------------------------------------------------------*@
+
+    @*<div class="modal-dialog">
+            <div class="modal-content bg-success">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <span class="icon icon-check icon-5x"></span>
+                        <h3>Success</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            <br>Animi ducimus id itaque totam saepe reiciendis corporis consectetur.
+                        </p>
+                        <div class="m-t-lg">
+                            <button class="btn btn-default" data-dismiss="modal" type="button">Continue</button>
+                            <button class="btn btn-success" data-dismiss="modal" type="button">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>*@
+
+    @*--------------------------------------------------------------------------------------------------------------------------------*@
+
+    @*<div role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content animated bounceIn">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">×</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <span class="text-success icon icon-check icon-5x"></span>
+                            <h3 class="text-success">Success</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                <br>Animi ducimus id itaque totam saepe reiciendis corporis consectetur.
+                            </p>
+                            <div class="m-t-lg">
+                                <button class="btn btn-success" data-dismiss="modal" type="button">Continue</button>
+                                <button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>*@
+
+
+
+    @*footer*@
+    @if (Model.idSetadi != 0)
+    {
+        @await Html.PartialAsync("_ModalFooter", new ModalFooter { SubmitButtonText = "ویرایش ستادی" })
+    }
+    else
+    {
+        @await Html.PartialAsync("_ModalFooter", new ModalFooter { SubmitButtonText = "افزودن ستادی" })
+    }
+
+</form>

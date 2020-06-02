@@ -1,0 +1,131 @@
+﻿@model Application.Models.ServiceTable
+@using Application.PublicModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Application
+
+
+<form asp-controller="ServiceTable" asp-action="AddEdit" id="addeditservicetable" data-ajax="true" data-ajax-method="post"
+      data-ajax-update="#addeditservicetable" data-ajax-mode="replace">
+
+
+    @*header*@
+
+    @if (Model.Id != 0)
+    {
+        @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "ویرایش " })
+    }
+    else
+    {
+        @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "افزودن " })
+    }
+
+
+
+
+
+    @*body*@
+
+    <div class="modal-body form-horizontal">
+
+        <div class="row">
+            <div class="form-group">
+                <label asp-for="Gender" class="col-lg-3 col-sm-3 control-label">مرد</label>
+                <div class="col-lg-6">
+                    <input asp-for="Gender" value="1" class="form-control" />
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+                <label asp-for="Gender" class="col-lg-3 col-sm-3 control-label">زن</label>
+                <div class="col-lg-6">
+                    <input asp-for="Gender" value="0" class="form-control" />
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="IdCity" class="col-lg-2 col-sm-2 control-label"></label>
+                <div class="col-lg-6">
+                    <select asp-for="IdCity" asp-items="@ViewBag.City" class="form-control"></select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Age" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="Age" class="form-control" />
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IdEdu" class="col-lg-2 col-sm-2 control-label"></label>
+                <div class="col-lg-6">
+                    <select asp-for="IdEdu" asp-items="@ViewBag.Edu" class="form-control"></select>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="Job" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="Job" class="form-control" />
+                    <span asp-validation-for="Job" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="WicheService" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="WicheService" class="form-control" />
+                    <span asp-validation-for="WicheService" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="FlagMoraje" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="FlagMoraje" class="form-control" />
+                    <span asp-validation-for="FlagMoraje" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Des" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <textarea asp-for="Des" class="form-control"></textarea>
+                    <span asp-validation-for="Des" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group hidden">
+                <label asp-for="Id" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="Id" class="form-control" />
+                </div>
+            </div>
+
+            <input type="hidden" name="redirecturl" value="@Url.Action("index","servicetable")" />
+
+        </div>
+
+
+    </div>
+
+
+    @*footer*@
+    @if (Model.Id != 0)
+    {
+        @await Html.PartialAsync("_ModalFooter", new ModalFooter { SubmitButtonText = "ویرایش " })
+    }
+    else
+    {
+        @await Html.PartialAsync("_ModalFooter", new ModalFooter { SubmitButtonText = "افزودن " })
+    }
+
+
+
+
+
+</form>

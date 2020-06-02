@@ -1,0 +1,151 @@
+﻿@model Application.Models.ViewModels.TblINSTITUTE_ViewModel
+@using Application.PublicModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Application
+
+
+<form asp-controller="Institution" asp-action="AddEditInstitution" id="addeditnstitution" data-ajax="true" data-ajax-method="post"
+      data-ajax-update="#addeditnstitution" data-ajax-mode="replace">
+
+
+    @*header*@
+
+    @if (Model.idInstitues != 0)
+    {
+        @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "ویرایش" })
+    }
+    else
+    {
+        @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "افزودن" })
+    }
+
+    @*body*@
+    <div class="modal-body form-horizontal">
+
+        <div class="row">
+            <div class="form-group">
+                <label asp-for="codeOrgan" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="codeOrgan" class="form-control" />
+                    <span asp-validation-for="codeOrgan" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="nameOrgan" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="nameOrgan" class="form-control" />
+                    <span asp-validation-for="nameOrgan" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="nameOrganMain" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="nameOrganMain" class="form-control" />
+                    <span asp-validation-for="nameOrganMain" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="hos" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="hos" class="form-control" />
+                    <span asp-validation-for="hos" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ADDRESS" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="ADDRESS" class="form-control" />
+                    <span asp-validation-for="ADDRESS" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TEL" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="TEL" class="form-control" />
+                    <span asp-validation-for="TEL" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="fax" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="fax" class="form-control" />
+                    <span asp-validation-for="fax" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="email" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="email" class="form-control" />
+                    <span asp-validation-for="email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="mobile" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="mobile" class="form-control" />
+                    <span asp-validation-for="mobile" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="idCity" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <select asp-for="idCity" asp-items="@Model.Cites" class="form-control"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="idowner" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <select asp-for="idowner" asp-items="@Model.Owners" class="form-control"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="idINSTITUTE_TYPE" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <select asp-for="idINSTITUTE_TYPE" asp-items="@Model.Institute_Types" class="form-control"></select>
+                </div>
+            </div>
+
+            <div class="form-group hidden">
+                <label asp-for="idInstitues" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="idInstitues" class="form-control" />
+                </div>
+            </div>
+
+            <input type="hidden" name="redirecturl" value="@Url.Action("index","Institution")" />
+
+        </div>
+
+
+    </div>
+
+
+    @*footer*@
+    @if (Model.idInstitues != 0)
+    {
+        @await Html.PartialAsync("_ModalFooter", new ModalFooter { SubmitButtonText = "ویرایش" })
+    }
+    else
+    {
+        @await Html.PartialAsync("_ModalFooter", new ModalFooter { SubmitButtonText = "افزودن" })
+    }
+
+
+
+
+
+</form>

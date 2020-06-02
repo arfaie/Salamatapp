@@ -1,0 +1,71 @@
+﻿@model Application.Models.NavbarModels.UserNavbar
+@using Application.PublicModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Application
+
+@{
+    ViewData["Title"] = "کاربری";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="top-buffer"></div>
+<div class="panel panel-primary">
+    <div class="panel-heading panel-head">لیست کاربران</div>
+    <div class="panel-body">
+        <div class="btn-group">
+           
+        </div>
+
+        <div></div>
+        <table class="table table-bordered table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th>نام و نام خانوادگی</th>
+                    <th>ایمیل</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.userListViewModels)
+                {
+                    <tr>
+                        <td>@item.FullName</td>
+                        <td>@item.Email</td>
+                        <td>
+                            <a class="btn btn-info" id="showedituser" data-toggle="modal" asp-action="EditUser"
+                               data-target="#modal-action-user" asp-route-Id="@item.Id">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                                ویرایش 
+                            </a>
+                            
+                            <a class="btn btn-info" id="showedituser" data-toggle="modal" asp-action="ChangePassword"
+                               data-target="#modal-action-user" asp-route-Id="@item.Id">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                                ویرایش پسورد 
+                            </a>
+
+                          
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action-user", Size = ModalSize.Medium })
+
+@section Scripts{
+    <script src="~/js/modal-js/user-index.js"></script>
+}
+
+

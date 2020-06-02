@@ -1,0 +1,138 @@
+﻿@model Application.Models.tbl_InformingOrgan
+@using Application.PublicModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Application
+
+<form asp-controller="InformingOrgan" asp-action="AddEditInformingOrgan" enctype="multipart/form-data">
+    @*header*@
+    @if (Model.idInfo != 0)
+    {
+        @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "ویرایش اطلاعیه" })
+    }
+    else
+    {
+        @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "افزودن اطلاعیه" })
+    }
+    @*body*@
+    <div class="modal-body form-horizontal">
+        <div class="row">
+            <div class="form-group">
+                <label asp-for="infoDes" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <textarea asp-for="infoDes" class="form-control" ></textarea>
+                    <span asp-validation-for="infoDes" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group hidden">
+                <label asp-for="idInfo" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="idInfo" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="filename1" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input type="file" id="files" name="files" multiple class="btn btn-danger" />
+                </div>
+                @if (Model.idInfo != 0)
+                {
+                    <input type="hidden" name="ImgName" value="@Model.filename1" />
+                }
+            </div>
+
+            <div class="form-group">
+                <label asp-for="filename2" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input type="file" id="files" name="files" multiple class="btn btn-danger" />
+                </div>
+                @if (Model.idInfo != 0)
+                {
+                    <input type="hidden" name="ImgName" value="@Model.filename2" />
+                }
+            </div>
+
+            <input type="hidden" name="redirecturl" value="@Url.Action("index","InformingOrgan")" />
+
+        </div>
+    </div>
+    @*footer*@
+    @if (Model.idInfo != 0)
+    {
+        @*@await Html.PartialAsync("_ModalFooter", new ModalFooter { SubmitButtonText = "ویرایش موسسه" })*@
+
+        <div class="modal-footer">
+            <button class="btn btn-info" type="button" data-dismiss="modal" value="برگشت"></button>
+            <input type="submit" id="submitdata" class="btn btn-info" value="ویرایش اطلاعیه" />
+        </div>
+    }
+    else
+    {
+        @*@await Html.PartialAsync("_ModalFooter", new ModalFooter { SubmitButtonText = "افزودن موسسه" })*@
+
+        <div class="modal-footer">
+            <button class="btn btn-info" type="button" data-dismiss="modal" value="برگشت"></button>
+            <input type="submit" id="submitdata" class="btn btn-success" value="افزودن اطلاعیه" />
+        </div>
+    }
+
+    @* ReSharper disable once Razor.SectionNotResolved *@
+    @section Scripts{
+        <script>
+
+        $(document).on('Click', '#submitdata', function (evt) {
+            evt.preventDefault();
+
+            var data = new FormData();
+
+            //دریافت مقادیر فایل آپلودی
+            var fileupload = $("#files").get(0);
+            var files = fileupload.files;
+
+
+
+            for (var i = 0; i < files.length; i++) {
+                data.append('files', files[i]);
+            }
+
+            //دریافت مقادیر موجود
+            $('input,select').each(function (x,y) {
+
+                data.append($(y).attr('name'), $(y).val());
+
+            });
+
+            $.ajax({
+                type: "Post",
+                url: '@Url.Action("AddEditInformingOrgan", "InformingOrgan", new { area ="Admin"})',
+                contentType: false,
+                processData: false,
+                data: data
+                //وقتی که اطلاعات سمت سرور رفت و جواب از سرور آمد
+            }).done(function (res) {
+                if (res.status === "success") {
+                    alert(res.message);
+                    window.location.href = '@Url.Action("Index", "InformingOrgan")';
+                }
+                else {
+
+                    $.each(res.error, function (a, b) {
+                        alert(b);
+                    })
+
+                    //alert(res.error);
+                }
+                //برای وقتی که کلا اطلاعات سمت سرور نرفت و در همان بدو ورود خطا داد
+            }).fail(function (xhr, b, error) {
+                alert(error);
+            })
+
+        });
+
+
+        </script>
+    }
+    }
+</form>

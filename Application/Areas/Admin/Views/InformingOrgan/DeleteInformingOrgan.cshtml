@@ -1,0 +1,20 @@
+﻿@model string
+@using Application.PublicModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Application
+
+<form asp-controller="InformingOrgan" asp-action="DeleteInformingOrgan">
+
+    @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "حذف اطلاعات" })
+
+    <div class="modal-body form-horizontal">
+        آیا از حذف  آیتم مطمئن هستید؟
+    </div>
+
+    <input type="hidden" name="redirecturl" value="@Url.Action("Index","InformingOrgan")" />
+
+
+    @await Html.PartialAsync("_ModalFooter", new ModalFooter { SubmitButtonText = "حذف اطلاعات" })
+
+</form>

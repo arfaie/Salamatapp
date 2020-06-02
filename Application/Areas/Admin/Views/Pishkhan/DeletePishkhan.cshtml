@@ -1,0 +1,20 @@
+﻿@model string
+@using Application.PublicModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Application
+
+<form asp-controller="Pishkhan" asp-action="DeletePishkhan">
+
+    @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "حذف پیشخوان" })
+
+    <div class="modal-body form-horizontal">
+        آیا از حذف  @Model مطمئن هستید؟
+    </div>
+
+    <input type="hidden" name="redirecturl" value="@Url.Action("index","Pishkhan")" />
+
+
+    @await Html.PartialAsync("_ModalFooter", new ModalFooter { SubmitButtonText = "حذف پیشخوان" })
+
+</form>

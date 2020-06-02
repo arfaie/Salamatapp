@@ -1,0 +1,187 @@
+﻿@model Application.Models.Tbl_Pishkhan
+@using Application.PublicModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Application
+
+
+<form asp-controller="Pishkhan" asp-action="AddEditPishkhan" id="addeditpishkhan" data-ajax="true" data-ajax-method="post"
+      data-ajax-update="#addeditpishkhan" data-ajax-mode="replace">
+
+
+    @*header*@
+
+    @if (Model.idPishkhan != 0)
+    {
+        @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "ویرایش پیشخوان" })
+    }
+    else
+    {
+        @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "افزودن پیشخوان" })
+    }
+
+
+
+
+
+    @*body*@
+
+    <div class="modal-body form-horizontal">
+        
+        <div class="form-group">
+            <label asp-for="ManagerName" class="col-lg-3 col-sm-3 control-label"></label>
+            <div class="col-lg-6">
+                <input asp-for="ManagerName" class="form-control" />
+                <span asp-validation-for="ManagerName" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label asp-for="city" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="city" class="form-control" />
+                    <span asp-validation-for="city" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="code" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="code" class="form-control" />
+                    <span asp-validation-for="code" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="address" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <textarea asp-for="address" class="form-control" ></textarea>
+                    <span asp-validation-for="address" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="street" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="street" class="form-control" />
+                    <span asp-validation-for="street" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="tel" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="tel" class="form-control" />
+                    <span asp-validation-for="tel" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="x" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="x" class="form-control" />
+                    <span asp-validation-for="x" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="y" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="y" class="form-control" />
+                    <span asp-validation-for="y" class="text-danger"></span>
+                </div>
+            </div>
+
+           
+            @Html.HiddenFor(x=>x.idPishkhan)
+            @*<div class="form-group hidden">
+                <label asp-for="idPishkhan" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="col-lg-6">
+                    <input asp-for="idPishkhan" class="form-control" />
+                </div>
+            </div>*@
+
+            <input type="hidden" name="redirecturl" value="@Url.Action("index","Pishkhan")" />
+
+        </div>
+
+
+    </div>
+
+
+    @*----------------------------------------------------------------------------------------------------------------------*@
+
+    @*<div class="modal-dialog">
+            <div class="modal-content bg-success">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <span class="icon icon-check icon-5x"></span>
+                        <h3>Success</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            <br>Animi ducimus id itaque totam saepe reiciendis corporis consectetur.
+                        </p>
+                        <div class="m-t-lg">
+                            <button class="btn btn-default" data-dismiss="modal" type="button">Continue</button>
+                            <button class="btn btn-success" data-dismiss="modal" type="button">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>*@
+
+    @*--------------------------------------------------------------------------------------------------------------------------------*@
+
+    @*<div role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content animated bounceIn">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">×</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <span class="text-success icon icon-check icon-5x"></span>
+                            <h3 class="text-success">Success</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                <br>Animi ducimus id itaque totam saepe reiciendis corporis consectetur.
+                            </p>
+                            <div class="m-t-lg">
+                                <button class="btn btn-success" data-dismiss="modal" type="button">Continue</button>
+                                <button class="btn btn-default" data-dismiss="modal" type="button">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>*@
+
+
+
+    @*footer*@
+    @if (Model.idPishkhan != 0)
+    {
+        @await Html.PartialAsync("_ModalFooter", new ModalFooter { SubmitButtonText = "ویرایش پیشخوان" })
+    }
+    else
+    {
+        @await Html.PartialAsync("_ModalFooter", new ModalFooter { SubmitButtonText = "افزودن پیشخوان" })
+    }
+
+</form>
