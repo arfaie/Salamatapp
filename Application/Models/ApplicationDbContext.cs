@@ -60,6 +60,10 @@ namespace Application.Models
         public DbSet<EmployeeType> EmployeeTypes { get; set; }
         public DbSet<OfficeRefrandum> OfficeRefrandums { get; set; }
 
+        public DbSet<Tbl_YearsOfService> TblYearsOfServices { get; set; }
+
+        public DbSet<tbl_Education2> TblEducation2 { get; set; }
+
         public DbQuery<View_NewInstitutes> View_NewInstitutes { get; set; }
 
         public DbQuery<ViewPeronal> ViewPeronal { get; set; }
