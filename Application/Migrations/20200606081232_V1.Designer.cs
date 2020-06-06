@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Application.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200601132547_officeRefrandum")]
-    partial class officeRefrandum
+    [Migration("20200606081232_V1")]
+    partial class V1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -210,8 +210,6 @@ namespace Application.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("EmployeeId");
-
-                    b.Property<int>("EmployeeTypeId");
 
                     b.Property<bool>("Gender");
 
@@ -581,6 +579,19 @@ namespace Application.Migrations
                     b.ToTable("tbl_Education");
                 });
 
+            modelBuilder.Entity("Application.Models.tbl_Education2", b =>
+                {
+                    b.Property<int>("idEdu")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("EduName");
+
+                    b.HasKey("idEdu");
+
+                    b.ToTable("TblEducation2");
+                });
+
             modelBuilder.Entity("Application.Models.tbl_Informing", b =>
                 {
                     b.Property<int>("idInfo")
@@ -779,6 +790,19 @@ namespace Application.Migrations
                     b.HasKey("idState");
 
                     b.ToTable("tbl_State");
+                });
+
+            modelBuilder.Entity("Application.Models.Tbl_YearsOfService", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TblYearsOfServices");
                 });
 
             modelBuilder.Entity("Application.Models.TblAudience", b =>
