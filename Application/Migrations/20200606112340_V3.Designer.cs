@@ -4,14 +4,16 @@ using Application.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Application.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200606112340_V3")]
+    partial class V3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -207,8 +209,6 @@ namespace Application.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Des");
-
                     b.Property<int>("EmployeeId");
 
                     b.Property<bool>("Gender");
@@ -237,11 +237,7 @@ namespace Application.Migrations
 
                     b.Property<string>("IdQ9");
 
-                    b.Property<DateTime>("SubmitDateTime");
-
                     b.Property<int>("YearsOfServiceId");
-
-                    b.Property<int>("idPerson");
 
                     b.Property<bool>("isMarried");
 
@@ -252,8 +248,6 @@ namespace Application.Migrations
                     b.HasIndex("IdEduu");
 
                     b.HasIndex("YearsOfServiceId");
-
-                    b.HasIndex("idPerson");
 
                     b.ToTable("OfficeRefrandums");
                 });
@@ -344,11 +338,7 @@ namespace Application.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DateTime");
-
                     b.Property<string>("Des");
-
-                    b.Property<bool>("Gender");
 
                     b.Property<int>("IdBime");
 
@@ -1386,11 +1376,6 @@ namespace Application.Migrations
                     b.HasOne("Application.Models.tbl_LongOfService", "TblLongOfService")
                         .WithMany()
                         .HasForeignKey("YearsOfServiceId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Application.Models.TblPersonal", "TblPersonal")
-                        .WithMany()
-                        .HasForeignKey("idPerson")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

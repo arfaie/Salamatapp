@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Application.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200601141431_Ref_v3")]
-    partial class Ref_v3
+    [Migration("20200606111601_V2")]
+    partial class V2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -209,7 +209,7 @@ namespace Application.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("EmployeeTypeId");
+                    b.Property<int>("EmployeeId");
 
                     b.Property<bool>("Gender");
 
@@ -243,7 +243,7 @@ namespace Application.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeTypeId");
+                    b.HasIndex("EmployeeId");
 
                     b.HasIndex("IdEdu");
 
@@ -579,6 +579,19 @@ namespace Application.Migrations
                     b.ToTable("tbl_Education");
                 });
 
+            modelBuilder.Entity("Application.Models.tbl_Education2", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TblEducation2");
+                });
+
             modelBuilder.Entity("Application.Models.tbl_Informing", b =>
                 {
                     b.Property<int>("idInfo")
@@ -667,6 +680,19 @@ namespace Application.Migrations
                     b.HasKey("idIns");
 
                     b.ToTable("tbl_Institution");
+                });
+
+            modelBuilder.Entity("Application.Models.tbl_LongOfService", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TblLongOfServices");
                 });
 
             modelBuilder.Entity("Application.Models.tbl_Moraje", b =>
@@ -1337,7 +1363,7 @@ namespace Application.Migrations
                 {
                     b.HasOne("Application.Models.EmployeeType", "EmployeeType")
                         .WithMany()
-                        .HasForeignKey("EmployeeTypeId")
+                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Application.Models.tbl_Education", "TblEducation")

@@ -751,6 +751,7 @@ namespace API2.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.DateTime = DateTime.UtcNow;
                 _context.SurveyOfIinsureds.Add(model);
                 _context.SaveChanges();
 
@@ -765,10 +766,19 @@ namespace API2.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.OfficeRefrandums.Add(model);
-                _context.SaveChanges();
-
-                return true.ToString();
+                var person = _context.TblPersonal.Where(x => x.natCode == model.NatCode).FirstOrDefault();
+                if (person != null)
+                {
+                    model.SubmitDateTime = DateTime.UtcNow;
+                    model.idPerson = person.idPerson;
+                    _context.OfficeRefrandums.Add(model);
+                    _context.SaveChanges();
+                    return true.ToString();
+                }
+                else
+                {
+                    return false.ToString();
+                }
             }
 
             return false.ToString();

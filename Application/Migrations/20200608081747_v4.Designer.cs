@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Application.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200531044239_NewRefrandom")]
-    partial class NewRefrandom
+    [Migration("20200608081747_v4")]
+    partial class v4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -106,6 +106,19 @@ namespace Application.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Application.Models.EmployeeType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EmployeeTypes");
+                });
+
             modelBuilder.Entity("Application.Models.Institute_Personal", b =>
                 {
                     b.Property<int>("id_personal")
@@ -188,6 +201,65 @@ namespace Application.Migrations
                     b.HasKey("id");
 
                     b.ToTable("NazarSanji2");
+                });
+
+            modelBuilder.Entity("Application.Models.OfficeRefrandum", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateTime");
+
+                    b.Property<string>("Des");
+
+                    b.Property<int>("EmployeeId");
+
+                    b.Property<bool>("Gender");
+
+                    b.Property<int>("IdEduu");
+
+                    b.Property<string>("IdQ1");
+
+                    b.Property<string>("IdQ10");
+
+                    b.Property<string>("IdQ11");
+
+                    b.Property<string>("IdQ2");
+
+                    b.Property<string>("IdQ3");
+
+                    b.Property<string>("IdQ4");
+
+                    b.Property<string>("IdQ5");
+
+                    b.Property<string>("IdQ6");
+
+                    b.Property<string>("IdQ7");
+
+                    b.Property<string>("IdQ8");
+
+                    b.Property<string>("IdQ9");
+
+                    b.Property<string>("NatCode");
+
+                    b.Property<int>("PersonalId");
+
+                    b.Property<int>("YearsOfServiceId");
+
+                    b.Property<bool>("isMarried");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("IdEduu");
+
+                    b.HasIndex("PersonalId");
+
+                    b.HasIndex("YearsOfServiceId");
+
+                    b.ToTable("OfficeRefrandums");
                 });
 
             modelBuilder.Entity("Application.Models.ROLE_TYPE_", b =>
@@ -519,6 +591,19 @@ namespace Application.Migrations
                     b.ToTable("tbl_Education");
                 });
 
+            modelBuilder.Entity("Application.Models.tbl_Education2", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TblEducation2");
+                });
+
             modelBuilder.Entity("Application.Models.tbl_Informing", b =>
                 {
                     b.Property<int>("idInfo")
@@ -607,6 +692,19 @@ namespace Application.Migrations
                     b.HasKey("idIns");
 
                     b.ToTable("tbl_Institution");
+                });
+
+            modelBuilder.Entity("Application.Models.tbl_LongOfService", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TblLongOfServices");
                 });
 
             modelBuilder.Entity("Application.Models.tbl_Moraje", b =>
@@ -1271,6 +1369,29 @@ namespace Application.Migrations
                     b.HasOne("Application.Models.ROLE_TYPE_", "ROLE_TYPE_")
                         .WithMany()
                         .HasForeignKey("Id_ROLETYPE");
+                });
+
+            modelBuilder.Entity("Application.Models.OfficeRefrandum", b =>
+                {
+                    b.HasOne("Application.Models.EmployeeType", "EmployeeType")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Application.Models.tbl_Education2", "TblEducation2")
+                        .WithMany()
+                        .HasForeignKey("IdEduu")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Application.Models.TblPersonal", "TblPersonal")
+                        .WithMany()
+                        .HasForeignKey("PersonalId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Application.Models.tbl_LongOfService", "TblLongOfService")
+                        .WithMany()
+                        .HasForeignKey("YearsOfServiceId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Application.Models.ServiceTable", b =>

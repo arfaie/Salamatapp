@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Application.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200601141028_Ref_v2")]
-    partial class Ref_v2
+    [Migration("20200608082007_v4.1")]
+    partial class v41
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -209,13 +209,15 @@ namespace Application.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("EmployeeId");
+                    b.Property<DateTime>("DateTime");
 
-                    b.Property<int>("EmployeeTypeId");
+                    b.Property<string>("Des");
+
+                    b.Property<int>("EmployeeId");
 
                     b.Property<bool>("Gender");
 
-                    b.Property<int>("IdEdu");
+                    b.Property<int>("IdEduu");
 
                     b.Property<string>("IdQ1");
 
@@ -239,7 +241,11 @@ namespace Application.Migrations
 
                     b.Property<string>("IdQ9");
 
-                    b.Property<int>("YearsOfService");
+                    b.Property<string>("NatCode");
+
+                    b.Property<int>("YearsOfServiceId");
+
+                    b.Property<int>("idPerson");
 
                     b.Property<bool>("isMarried");
 
@@ -247,7 +253,11 @@ namespace Application.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.HasIndex("IdEdu");
+                    b.HasIndex("IdEduu");
+
+                    b.HasIndex("YearsOfServiceId");
+
+                    b.HasIndex("idPerson");
 
                     b.ToTable("OfficeRefrandums");
                 });
@@ -581,6 +591,19 @@ namespace Application.Migrations
                     b.ToTable("tbl_Education");
                 });
 
+            modelBuilder.Entity("Application.Models.tbl_Education2", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TblEducation2");
+                });
+
             modelBuilder.Entity("Application.Models.tbl_Informing", b =>
                 {
                     b.Property<int>("idInfo")
@@ -669,6 +692,19 @@ namespace Application.Migrations
                     b.HasKey("idIns");
 
                     b.ToTable("tbl_Institution");
+                });
+
+            modelBuilder.Entity("Application.Models.tbl_LongOfService", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TblLongOfServices");
                 });
 
             modelBuilder.Entity("Application.Models.tbl_Moraje", b =>
@@ -1342,9 +1378,19 @@ namespace Application.Migrations
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Application.Models.tbl_Education", "TblEducation")
+                    b.HasOne("Application.Models.tbl_Education2", "TblEducation2")
                         .WithMany()
-                        .HasForeignKey("IdEdu")
+                        .HasForeignKey("IdEduu")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Application.Models.tbl_LongOfService", "TblLongOfService")
+                        .WithMany()
+                        .HasForeignKey("YearsOfServiceId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Application.Models.TblPersonal", "TblPersonal")
+                        .WithMany()
+                        .HasForeignKey("idPerson")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

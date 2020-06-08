@@ -19,6 +19,10 @@ namespace Application.Models
         [ForeignKey("IdCity")]
         public virtual TblCity_ TblCity { get; set; }
 
+        public bool Gender { get; set; }
+        public DateTime DateTime { get; set; }
+
+
         public string hospitalName { get; set; }
 
         public string hospitalStay { get; set; }
