@@ -53,41 +53,41 @@ namespace API2.Controllers
         }
 
         [HttpPost("WM_Comment")]
-        public List<tbl_Comment> WM_Comment(tbl_Comment tbl_)
+        public bool WM_Comment(tbl_Comment tbl_)
         {
-            tbl_Comment tbl = new tbl_Comment();
-            clsTarikh tarix = new clsTarikh();
-            //string[] a = args.Split('~');
-            //tbl.idState = int.Parse(a[0]);
-            //if (tbl.idSex == false)
-            //{
-            //    tbl.idSex = false;
-            //}
-            //else
-            //{
-            //    tbl.idSex = true;
-            //}
-            tbl.idState = tbl_.idState;
-            tbl.idSex = tbl_.idSex;
-            tbl.age = tbl_.age;
-            tbl.idEducation = tbl_.idEducation;
-            tbl.idBime = tbl_.idBime;
-            tbl.idMoraje = tbl_.idMoraje;
-            tbl.idReason = tbl_.idReason;
-            tbl.IdQ1 = tbl_.IdQ1;
-            tbl.IdQ2 = tbl_.IdQ2;
-            tbl.IdQ3 = tbl_.IdQ3;
-            tbl.IdQ4 = tbl_.IdQ4;
-            tbl.IdQ5 = tbl_.IdQ5;
-            tbl.IdQ6 = tbl_.IdQ6;
-            tbl.CommentText = tbl_.CommentText;
-            tbl.FirstPerson = tbl_.FirstPerson;
-            tbl.SecondPeson = tbl_.SecondPeson;
-            tbl.ComDate = tarix.date();
-            tbl.ComTime = tarix.time();
-            _context.tbl_Comment.Add(tbl);
-            _context.SaveChanges();
-            return null;
+            try
+            {
+                tbl_Comment tbl = new tbl_Comment();
+                clsTarikh tarix = new clsTarikh();
+                tbl.idState = tbl_.idState;
+                tbl.idSex = tbl_.idSex;
+                tbl.age = tbl_.age;
+                tbl.idEducation = tbl_.idEducation;
+                tbl.idBime = tbl_.idBime;
+                tbl.idMoraje = tbl_.idMoraje;
+                tbl.idReason = tbl_.idReason;
+                tbl.IdQ1 = tbl_.IdQ1;
+                tbl.IdQ2 = tbl_.IdQ2;
+                tbl.IdQ3 = tbl_.IdQ3;
+                tbl.IdQ4 = tbl_.IdQ4;
+                tbl.IdQ5 = tbl_.IdQ5;
+                tbl.IdQ6 = tbl_.IdQ6;
+                tbl.CommentText = tbl_.CommentText;
+                tbl.FirstPerson = tbl_.FirstPerson;
+                tbl.SecondPeson = tbl_.SecondPeson;
+                tbl.ComDate = tarix.date();
+                tbl.ComTime = tarix.time();
+                _context.tbl_Comment.Add(tbl);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return true;
+
+                throw;
+            }
+            
         }
 
         [HttpGet("WM_Inform")]
