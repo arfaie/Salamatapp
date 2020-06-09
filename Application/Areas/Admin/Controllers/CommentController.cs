@@ -11,6 +11,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Application.Net;
+using Application.Helpers.OptionEnums;
+using Application.Net.OptionEnums;
 
 namespace Application.Areas.Admin.Controllers
 {
@@ -62,7 +65,7 @@ namespace Application.Areas.Admin.Controllers
                     BimeType = item.BimeType,
                     Moraje = item.Moraje,
                     ReasonText = item.ReasonText,
-
+                    flag=item.flag,
                     IdQ1 = getArzyabi(item.IdQ1),
                     IdQ2 = getArzyabi(item.IdQ2),
                     IdQ3 = getArzyabi(item.IdQ3),
@@ -391,7 +394,16 @@ namespace Application.Areas.Admin.Controllers
         }
 
 
+        public IActionResult isRead(int id)
+        {
+            var select = _context.tbl_Comment.Where(x => x.idComment == id).FirstOrDefault();
+            select.flag = true;
+            _context.tbl_Comment.Update(select);
+            _context.SaveChangesAsync();
+            TempData["Notif"] = Notification.ShowNotif(MessageType.Edit, type: ToastType.green);
+            return RedirectToAction("index");
 
+        }
 
         //[HttpGet]
         //public async Task<IActionResult> AddComment()

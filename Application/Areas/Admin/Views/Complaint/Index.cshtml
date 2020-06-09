@@ -94,6 +94,7 @@
                                 <th>آدرس</th>
                                 <th>نوع مخاطب</th>
                                 <th>تاریخ</th>
+                                <th>وضعیت</th>
                                 <th>کد بیمه</th>
                             </tr>
                         </thead>
@@ -145,6 +146,22 @@
                                         {
                                             <td>@item.dateSend</td>
                                         }
+                                        <td>
+                                            @if (item.readed == false)
+                                            {
+                                                <a class="btn btn-danger" id="idComment" asp-action="isRead"
+                                                   asp-route-Id="@item.idComplaint">
+                                                    خوانده شده
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <div>
+                                                    خوانده شده
+                                                </div>
+                                            }
+
+                                        </td>
                                         @if (item.CodeInsu == "null")
                                         {
                                             <td>خالی</td>
@@ -160,7 +177,7 @@
 
                         </tbody>
                     </table>
-                   
+
 
                 </div>
             </div>
@@ -225,47 +242,47 @@
 
     @*<script>
 
-        function exportTableToExcel(example, filename) {
+            function exportTableToExcel(example, filename) {
 
-            if (filename != null && filename != '') {
+                if (filename != null && filename != '') {
 
-                var downloadLink;
-                var dataType = 'application/vnd.ms-excel';
-                var tableSelect = document.getElementById(example);
-                var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+                    var downloadLink;
+                    var dataType = 'application/vnd.ms-excel';
+                    var tableSelect = document.getElementById(example);
+                    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
 
-                // Specify file name
-                //filename = filename ? filename + '.xls' : 'excel_data.xls';
-                filename = filename;
+                    // Specify file name
+                    //filename = filename ? filename + '.xls' : 'excel_data.xls';
+                    filename = filename;
 
-                // Create download link element
-                downloadLink = document.createElement("a");
+                    // Create download link element
+                    downloadLink = document.createElement("a");
 
-                document.body.appendChild(downloadLink);
+                    document.body.appendChild(downloadLink);
 
-                if (navigator.msSaveOrOpenBlob) {
-                    var blob = new Blob(['\ufeff', tableHTML],
-                        {
-                            type: dataType
-                        });
-                    navigator.msSaveOrOpenBlob(blob, filename);
+                    if (navigator.msSaveOrOpenBlob) {
+                        var blob = new Blob(['\ufeff', tableHTML],
+                            {
+                                type: dataType
+                            });
+                        navigator.msSaveOrOpenBlob(blob, filename);
+                    } else {
+                        // Create a link to the file
+                        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+                        // Setting the file name
+                        downloadLink.download = filename;
+
+                        //triggering the function
+                        downloadLink.click();
+                    }
+
                 } else {
-                    // Create a link to the file
-                    downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-
-                    // Setting the file name
-                    downloadLink.download = filename;
-
-                    //triggering the function
-                    downloadLink.click();
+                    alert('نام فایل نمی تواند خالی باشد');
                 }
-
-            } else {
-                alert('نام فایل نمی تواند خالی باشد');
             }
-        }
 
-    </script>*@
+        </script>*@
 
 }
 

@@ -4,9 +4,12 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Helpers.OptionEnums;
 using Application.Models;
 using Application.Models.NavbarModels;
 using Application.Models.ViewModels;
+using Application.Net;
+using Application.Net.OptionEnums;
 using FastMember;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -286,6 +289,16 @@ namespace Application.Areas.Admin.Controllers
                 fileDownloadName: DateTime.Now.Date.ToShortDateString() + ".xlsx"
             );
 
+
+        }
+        public IActionResult isRead(int id)
+        {
+            var select = _context.TblComplaint.Where(x => x.idComplaint == id).FirstOrDefault();
+            select.readed = true;
+            _context.TblComplaint.Update(select);
+            _context.SaveChangesAsync();
+            TempData["Notif"] = Notification.ShowNotif(MessageType.Edit, type: ToastType.green);
+            return RedirectToAction("index");
 
         }
 

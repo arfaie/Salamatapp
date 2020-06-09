@@ -67,7 +67,7 @@ namespace Application
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            
+
             app.UseSession();
             app.UseIdentity();
             app.UseMvc(routes =>

@@ -27,41 +27,7 @@
                     </div>
                     <strong>نظرسنجی بیمه شدگان بستری در بیمارستان</strong>
                 </div>
-                <div style="margin-bottom: 0;">
-                    <form method="post" asp-controller="SurveyOfIinsured" asp-action="exportExcel">
-
-                        <div class="input-group" style="margin-top: 7px;">
-
-                            @*<div class="input-group col-md-2 pull-right">
-                                    <div class="input-group-addon" data-MdDateTimePicker="true" data-trigger="click" data-targetselector="#todate1">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </div>
-                                    <input type="text" class="form-control" id="todate1" name="todate1" placeholder="تا تاریخ" data-MdDateTimePicker="true" data-placement="right" />
-                                </div>*@
-
-                            @*<div class="input-group col-md-2 pull-right" style="margin-left: 7px;">
-                                    <div class="input-group-addon" data-MdDateTimePicker="true" data-trigger="click" data-targetselector="#fromDate1" data-groupid="group1" data-fromdate="true" data-enabletimepicker="false" data-placement="left">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </div>
-                                    <input type="text" class="form-control" id="fromDate1" name="fromDate1" placeholder="از تاریخ" data-MdDateTimePicker="true" data-trigger="click" data-targetselector="#fromDate1" data-groupid="group1" data-fromdate="true" data-enabletimepicker="false" data-placement="right" />
-                                </div>*@
-
-
-
-                            <div class="input-group-btn">
-                                @* <button style="border-radius: 4px; margin-right: 20px; margin-left: 50px;" class="btn btn-primary" type="submit">جستجو</button>*@
-
-                                @*<button style="border-radius: 4px; margin-top: 2px;  margin-right: 20px; margin-left: 50px;" class="btn btn-primary" onclick="exportTableToExcel('example',prompt('نام فایل را وارد کنید:'))">خروجی اکسل</button>*@
-                                <button style="border-radius: 4px; margin-top: 2px;  margin-right: 20px; margin-left: 50px;" class="btn btn-primary" asp-action="exportExcel" asp-controller="SurveyOfIinsured">خروجی اکسل</button>
-
-                            </div>
-                        </div>
-                    </form>
-
-
-
-
-                </div>
+                
                 <div class="card-body">
 
                     <div class="md-form-group md-label-floating col-md-6">
@@ -73,12 +39,9 @@
                     <div class="md-form-group md-label-floating col-md-6">
                         <div class="margin-top">
                             <div class="col-xs-6 col-md-6">
-
-                                <a class="btn btn-primary marginbutoom" id="showcategory" data-toggle="modal" asp-action="AddEdit"
-                                   data-target="#modal-action-surveyofiinsured">
-                                    <i class="glyphicon glyphicon-plus"></i>
-                                    افزودن اداره جدید
-                                </a>
+                                <form method="post" asp-controller="SurveyOfIinsured" asp-action="exportExcel">
+                                            <button style="border-radius: 4px;" class="btn btn-primary" asp-action="exportExcel" asp-controller="SurveyOfIinsured">خروجی اکسل</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -91,14 +54,6 @@
                                 <th>محل بیمارستان</th>
                                 <th>نوع بیمارستان</th>
                                 <th>نوع بیمه</th>
-                                <th>توضیحات</th>
-                                @*<th>سوال 1</th>
-                                    <th>سوال 2</th>
-                                    <th>سوال 3</th>
-                                    <th>سوال 4</th>
-                                    <th>سوال 5</th>
-                                    <th>سوال 6</th>
-                                    <th>توضیحات</th>*@
                             </tr>
                         </thead>
                         <tbody>
@@ -121,23 +76,8 @@
                                             <td>دولتی</td>
                                         }
                                         <td>@item?.TblBime.BimeType</td>
-                                        <td>@item.Des</td>
 
-
-                                        <td>
-                                            <a class="btn btn-info" id="editcategory" data-toggle="modal" asp-action="AddEdit"
-                                               data-target="#modal-action-surveyofiinsured" asp-route-Id="@item.Id">
-                                                <i class="glyphicon glyphicon-pencil"></i>
-                                                ویرایش
-                                            </a>
-
-                                            <a class="btn btn-danger" id="showcategory" data-toggle="modal" asp-action="Delete"
-                                               data-target="#modal-action-surveyofiinsured" asp-route-Id="@item.Id">
-                                                <i class="glyphicon glyphicon-trash"></i>
-                                                حذف
-                                            </a>
-
-                                        </td>
+                                       
                                     </tr>
                                 }
                             }

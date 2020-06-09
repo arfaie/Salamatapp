@@ -213,27 +213,8 @@ namespace Application.Areas.Admin.Controllers
 
 
 
-                //var select = _context.View_Comment.OrderByDescending(c => c.idComment).ToList();
                 var select = _context.SurveyOfIinsureds.Include(c => c.TblCity).Include(c => c.TblBime).ToList();
 
-                //string fromdate1 = HttpContext.Session.GetString("cFromdate1");
-                //string todate1 = HttpContext.Session.GetString("cTodate1");
-
-                //if (fromdate1 != "null" && todate1 == "null")
-                //{
-                //    select = select.Where(m => m.ComDate.CompareTo(fromdate1) >= 0).ToList();
-
-                //}
-                //else if (todate1 != "null" && fromdate1 == "null")
-                //{
-                //    select = select.Where(m => m.ComDate.CompareTo(todate1) <= 0).ToList();
-                //}
-                //else if (fromdate1 != "null" && todate1 != "null")
-                //{
-
-                //    select = select.Where(m => m.ComDate.CompareTo(fromdate1) >= 0 && m.ComDate.CompareTo(todate1) <= 0)
-                //        .ToList();
-                //}
 
 
                 int i = 2;
