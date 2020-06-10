@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Helpers.OptionEnums;
 using Application.Models;
+using Application.Models.Helpers;
 using Application.Models.NavbarModels;
 using Application.Models.ViewModels;
 using Application.Net;
@@ -153,64 +155,74 @@ namespace Application.Areas.Admin.Controllers
                 worksheet.Cells[1, 2].Style.Font.Bold = true;
                 worksheet.Cells[1, 2].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
-                worksheet.Cells[1, 3].Value = "نام بیمارستان";
+                worksheet.Cells[1, 3].Value = "جنسیت";
                 worksheet.Cells[1, 3].Style.Font.Size = 12;
                 worksheet.Cells[1, 3].Style.Font.Bold = true;
                 worksheet.Cells[1, 3].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
-                worksheet.Cells[1, 4].Value = "محل بیمارستان";
+                worksheet.Cells[1, 4].Value = "نام بیمارستان";
                 worksheet.Cells[1, 4].Style.Font.Size = 12;
                 worksheet.Cells[1, 4].Style.Font.Bold = true;
                 worksheet.Cells[1, 4].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
-
-                worksheet.Cells[1, 5].Value = "نوع بیمارستان";
+                worksheet.Cells[1, 5].Value = "محل بیمارستان";
                 worksheet.Cells[1, 5].Style.Font.Size = 12;
                 worksheet.Cells[1, 5].Style.Font.Bold = true;
                 worksheet.Cells[1, 5].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
-                worksheet.Cells[1, 6].Value = "نوع بیمه";
+
+                worksheet.Cells[1, 6].Value = "نوع بیمارستان";
                 worksheet.Cells[1, 6].Style.Font.Size = 12;
                 worksheet.Cells[1, 6].Style.Font.Bold = true;
                 worksheet.Cells[1, 6].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
-
-                worksheet.Cells[1, 7].Value = "توضیحات";
+                worksheet.Cells[1, 7].Value = "نوع بیمه";
                 worksheet.Cells[1, 7].Style.Font.Size = 12;
                 worksheet.Cells[1, 7].Style.Font.Bold = true;
                 worksheet.Cells[1, 7].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
-                worksheet.Cells[1, 8].Value = "سوال اول";
+
+                worksheet.Cells[1, 8].Value = "توضیحات";
                 worksheet.Cells[1, 8].Style.Font.Size = 12;
                 worksheet.Cells[1, 8].Style.Font.Bold = true;
                 worksheet.Cells[1, 8].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
-                worksheet.Cells[1, 9].Value = "سوال دوم";
+                worksheet.Cells[1, 9].Value = "سوال اول";
                 worksheet.Cells[1, 9].Style.Font.Size = 12;
                 worksheet.Cells[1, 9].Style.Font.Bold = true;
                 worksheet.Cells[1, 9].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
-                worksheet.Cells[1, 10].Value = "سوال سوم";
+                
+
+                worksheet.Cells[1, 10].Value = "سوال دوم";
                 worksheet.Cells[1, 10].Style.Font.Size = 12;
                 worksheet.Cells[1, 10].Style.Font.Bold = true;
                 worksheet.Cells[1, 10].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
-                worksheet.Cells[1, 11].Value = "سوال چهارم";
+                worksheet.Cells[1, 11].Value = "سوال سوم";
                 worksheet.Cells[1, 11].Style.Font.Size = 12;
                 worksheet.Cells[1, 11].Style.Font.Bold = true;
                 worksheet.Cells[1, 11].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
-                worksheet.Cells[1, 12].Value = "سوال پنجم";
+                worksheet.Cells[1, 12].Value = "سوال چهارم";
                 worksheet.Cells[1, 12].Style.Font.Size = 12;
                 worksheet.Cells[1, 12].Style.Font.Bold = true;
                 worksheet.Cells[1, 12].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
-                worksheet.Cells[1, 13].Value = "سوال ششم";
+                worksheet.Cells[1, 13].Value = "سوال پنجم";
                 worksheet.Cells[1, 13].Style.Font.Size = 12;
                 worksheet.Cells[1, 13].Style.Font.Bold = true;
                 worksheet.Cells[1, 13].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
+                worksheet.Cells[1, 14].Value = "سوال ششم";
+                worksheet.Cells[1, 14].Style.Font.Size = 12;
+                worksheet.Cells[1, 14].Style.Font.Bold = true;
+                worksheet.Cells[1, 14].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
+                worksheet.Cells[1, 15].Value = "تاریخ ثبت";
+                worksheet.Cells[1, 15].Style.Font.Size = 12;
+                worksheet.Cells[1, 15].Style.Font.Bold = true;
+                worksheet.Cells[1, 15].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
 
                 var select = _context.SurveyOfIinsureds.Include(c => c.TblCity).Include(c => c.TblBime).ToList();
@@ -229,60 +241,77 @@ namespace Application.Areas.Admin.Controllers
                     worksheet.Cells[i, 2].Style.Font.Size = 12;
                     worksheet.Cells[i, 2].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
-                    worksheet.Cells[i, 3].Value = item.hospitalName;
-                    worksheet.Cells[i, 3].Style.Font.Size = 12;
-                    worksheet.Cells[i, 3].Style.Border.Top.Style = ExcelBorderStyle.Hair;
-
-                    worksheet.Cells[i, 4].Value = item.hospitalStay;
-                    worksheet.Cells[i, 4].Style.Font.Size = 12;
-                    worksheet.Cells[i, 4].Style.Border.Top.Style = ExcelBorderStyle.Hair;
-
-                    if (item.hospitalOwnership)
+                    string gender = "";
+                    if (item.Gender)
                     {
-                        worksheet.Cells[i, 5].Value = "خصوصی";
-                        worksheet.Cells[i, 5].Style.Font.Size = 12;
-                        worksheet.Cells[i, 5].Style.Border.Top.Style = ExcelBorderStyle.Hair;
+                        gender = "مرد";
                     }
                     else
                     {
-                        worksheet.Cells[i, 5].Value = "دولتی";
-                        worksheet.Cells[i, 5].Style.Font.Size = 12;
-                        worksheet.Cells[i, 5].Style.Border.Top.Style = ExcelBorderStyle.Hair;
+                        gender = "زن";
+                    }
+                    worksheet.Cells[i, 3].Value = gender;
+                    worksheet.Cells[i, 3].Style.Font.Size = 12;
+                    worksheet.Cells[i, 3].Style.Border.Top.Style = ExcelBorderStyle.Hair;
+
+                    worksheet.Cells[i, 4].Value = item.hospitalName;
+                    worksheet.Cells[i, 4].Style.Font.Size = 12;
+                    worksheet.Cells[i, 4].Style.Border.Top.Style = ExcelBorderStyle.Hair;
+
+                    worksheet.Cells[i, 5].Value = item.hospitalStay;
+                    worksheet.Cells[i, 5].Style.Font.Size = 12;
+                    worksheet.Cells[i, 5].Style.Border.Top.Style = ExcelBorderStyle.Hair;
+
+                    if (item.hospitalOwnership)
+                    {
+                        worksheet.Cells[i, 6].Value = "خصوصی";
+                        worksheet.Cells[i, 6].Style.Font.Size = 12;
+                        worksheet.Cells[i, 6].Style.Border.Top.Style = ExcelBorderStyle.Hair;
+                    }
+                    else
+                    {
+                        worksheet.Cells[i, 6].Value = "دولتی";
+                        worksheet.Cells[i, 6].Style.Font.Size = 12;
+                        worksheet.Cells[i, 6].Style.Border.Top.Style = ExcelBorderStyle.Hair;
                     }
 
-                   
 
-                    worksheet.Cells[i, 6].Value = item?.TblBime.BimeType;
-                    worksheet.Cells[i, 6].Style.Font.Size = 12;
-                    worksheet.Cells[i, 6].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
-                    worksheet.Cells[i, 7].Value = item.Des;
+                    worksheet.Cells[i, 7].Value = item?.TblBime.BimeType;
                     worksheet.Cells[i, 7].Style.Font.Size = 12;
                     worksheet.Cells[i, 7].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
-                    worksheet.Cells[i, 8].Value = item.IdQ1;
+                    worksheet.Cells[i, 8].Value = item.Des;
                     worksheet.Cells[i, 8].Style.Font.Size = 12;
                     worksheet.Cells[i, 8].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
-                    worksheet.Cells[i, 9].Value = item.IdQ2;
+                    worksheet.Cells[i, 9].Value = item.IdQ1;
                     worksheet.Cells[i, 9].Style.Font.Size = 12;
                     worksheet.Cells[i, 9].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
-                    worksheet.Cells[i, 10].Value = item.IdQ3;
+                    worksheet.Cells[i, 10].Value = item.IdQ2;
                     worksheet.Cells[i, 10].Style.Font.Size = 12;
                     worksheet.Cells[i, 10].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
-                    worksheet.Cells[i, 11].Value = item.IdQ4;
+                    worksheet.Cells[i, 11].Value = item.IdQ3;
                     worksheet.Cells[i, 11].Style.Font.Size = 12;
                     worksheet.Cells[i, 11].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
-                    worksheet.Cells[i, 12].Value = item.IdQ5;
+                    worksheet.Cells[i, 12].Value = item.IdQ4;
                     worksheet.Cells[i, 12].Style.Font.Size = 12;
                     worksheet.Cells[i, 12].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
-                    worksheet.Cells[i, 13].Value = item.IdQ6;
+                    worksheet.Cells[i, 13].Value = item.IdQ5;
                     worksheet.Cells[i, 13].Style.Font.Size = 12;
                     worksheet.Cells[i, 13].Style.Border.Top.Style = ExcelBorderStyle.Hair;
+
+                    worksheet.Cells[i, 14].Value = item.IdQ6;
+                    worksheet.Cells[i, 14].Style.Font.Size = 12;
+                    worksheet.Cells[i, 14].Style.Border.Top.Style = ExcelBorderStyle.Hair;
+
+                    worksheet.Cells[i, 15].Value = item.DateTime.toShamsi();
+                    worksheet.Cells[i, 15].Style.Font.Size = 12;
+                    worksheet.Cells[i, 15].Style.Border.Top.Style = ExcelBorderStyle.Hair;
 
                     i++;
 
@@ -294,15 +323,18 @@ namespace Application.Areas.Admin.Controllers
             if (filecontents == null || filecontents.Length == 0)
             {
                 return NotFound();
+
             }
 
             return File(
                 fileContents: filecontents,
                 contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                fileDownloadName: DateTime.Now.Date.ToShortDateString() + ".xlsx"
+                fileDownloadName: DateTime.Now.Date.ToShortDateString() + "_نظرسنجی_بیمه شدگان.xlsx"
             );
 
 
         }
+
+
     }
 }
